@@ -21,11 +21,11 @@ class TorchData(Dataset):
     def __len__(self):
         return self.len
 
-    def __getitem__(self, index):
-        words = self.words[index].astype(np.float32)
-        words = torch.from_numpy(words)
-        label = torch.from_numpy(self.label[index].astype(np.float32))
-        sample = {"words": words, "label": label}
+    def __getitem__(self, idx):
+        new_words = self.words[idx].astype(int)
+        new_words = torch.from_numpy(new_words)
+        label = torch.from_numpy(self.label[idx].astype(np.float32))
+        sample = {"words": new_words, "label": label}
         return sample
 
 
@@ -41,12 +41,14 @@ def torch_dataset_loader(dataset, batch_size, shuffle, kwargs):
     return loader
 
 
+train_loader = torch_dataset_loader(Settings.train_path, Settings.batch_size, True, Settings.kwargs)
+validation_loader = torch_dataset_loader(Settings.valid_path, Settings.batch_size, False, Settings.kwargs)
+test_loader = torch_dataset_loader(Settings.test_path, Settings.batch_size, False, Settings.kwargs)
+
 if __name__ == '__main__':
-    train_loader = torch_dataset_loader(Settings.train_path, Settings.batch_size, True, Settings.kwargs)
-    validation_loader = torch_dataset_loader(Settings.valid_path, Settings.batch_size, False, Settings.kwargs)
-    test_loader = torch_dataset_loader(Settings.test_path, Settings.batch_size, False, Settings.kwargs)
 
     for index, data_item in enumerate(train_loader):
+        words = data_item['words']
         print(data_item['words'].shape)
         print(data_item['label'].shape)
         break
