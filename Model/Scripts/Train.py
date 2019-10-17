@@ -138,7 +138,7 @@ def main_train(model, train_loader, valid_loader, log_name, save_name,
                epoch_num=Settings.epoch_num):
 
     Settings.dataset_len = len(train_loader)
-    Settings.log_step = len(train_loader) // len(train_loader)
+    Settings.log_step = len(train_loader) // Settings.print_count
 
     optimizer = torch.optim.RMSprop(model.parameters(), lr=lr)
     scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.5)
@@ -194,4 +194,4 @@ if __name__ == '__main__':
     from TextCNN import Model
 
     txtModel = Model()
-    main_train(txtModel, test_loader, validation_loader, "test.json", "model.h5")
+    main_train(txtModel, train_loader, validation_loader, "test.json", "model.h5")

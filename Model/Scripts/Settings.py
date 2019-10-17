@@ -35,3 +35,4 @@ class Settings:
     epoch_num = 20
     dataset_len = None
     log_step = None
+    print_count = 5  # print 5 count for 1 epoch
