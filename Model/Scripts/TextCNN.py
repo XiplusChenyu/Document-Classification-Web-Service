@@ -17,6 +17,7 @@ class Model(nn.Module):
             [nn.Conv2d(1, Settings.num_filters, (k, Settings.embedding_dim)) for k in Settings.filter_sizes])
         self.dropout = nn.Dropout(Settings.dropout)
         self.fc = nn.Linear(Settings.num_filters * len(Settings.filter_sizes), Settings.class_num)
+        self.softmax = nn.Softmax(dim=1)
 
     @staticmethod
     def conv_and_pool(x, conv):
@@ -30,10 +31,13 @@ class Model(nn.Module):
         out = torch.cat([self.conv_and_pool(out, conv) for conv in self.convs], 1)
         out = self.dropout(out)
         out = self.fc(out)
+        out = self.softmax(out)
         return out
 
 
 if __name__ == '__main__':
+
+    # use these code to test model IO
     TestModel = Model()
     from DataLoader import test_loader
 
