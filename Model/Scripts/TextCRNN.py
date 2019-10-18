@@ -38,7 +38,20 @@ class Model(nn.Module):
 if __name__ == '__main__':
 
     # use these code to test model IO
+
+    from DataLoader import torch_dataset_loader
+
     TestModel = Model()
-    print(TestModel)
+    test_loader = torch_dataset_loader(Settings.test_path, Settings.batch_size, False, Settings.kwargs)
+
+    for index, data in enumerate(test_loader):
+        word_input, target = data['words'], data['label']
+        print(word_input.shape, target.shape)
+
+        TestModel.eval()
+        predicted = TestModel(word_input)
+        print(predicted)
+        break
+
 
 

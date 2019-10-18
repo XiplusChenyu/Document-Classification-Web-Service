@@ -38,11 +38,11 @@ class Settings:
     else:
         kwargs = {}
 
-    # Training Params
-    learning_rate = None
-    batch_size = None
-    dropout = None
+    # Training Params (Default value)
+    learning_rate = 1e-5
+    batch_size = 20
+    dropout = 0.7
     epoch_num = None
     dataset_len = None
     log_step = None
-    print_count = None  # print 5 count for 1 epoch
+    print_count = 5  # print 5 count for 1 epoch

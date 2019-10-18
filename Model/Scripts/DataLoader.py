@@ -57,7 +57,7 @@ def torch_dataset_loader(dataset, batch_size, shuffle, kwargs):
 # e_test_loader = torch_dataset_loader(Settings.e_test_path, Settings.batch_size, False, Settings.kwargs)
 
 if __name__ == '__main__':
-
+    train_loader = torch_dataset_loader(Settings.train_path, Settings.batch_size, True, Settings.kwargs)
     for index, data_item in enumerate(train_loader):
         words = data_item['words']
         print(data_item['words'].shape)
