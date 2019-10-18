@@ -39,6 +39,8 @@ class Evaluator:
                     chunk = chunk.cuda()
                     
                 predict = self.model(chunk)
+                if Settings.cuda:
+                    predict = predict.cpu()
                 predict = predict.numpy()[0]
                 result += predict
         result /= len(chunks)
