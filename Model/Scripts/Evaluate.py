@@ -42,6 +42,54 @@ class Evaluator:
         score = np.max(result)
         return label, score
 
+    @staticmethod
+    def matrix_tuple(output, target):
+        """
+        This function is used for generate confusion matrix
+        :param output:
+        :param target:
+        :return:
+        """
+        f_output = output.cpu() if Settings.cuda else output.clone()
+        f_target = target.cpu() if Settings.cuda else target.clone()
+
+        output_res = f_output.detach().numpy()
+        target_res = f_target.detach().numpy()
+        predicted_index = np.argmax(output_res)
+        target_index = np.argmax(target_res)
+        result_list = [[int(predicted_index[i]), int(target_index[i])] for i in range(len(predicted_index))]
+        return result_list
+
+    def record_matrix(self, use_loader, log_name):
+        """
+        Use this method for generate logs used for plot confusion matrix
+        :param use_loader:
+        :param log_name:
+        :return:
+        """
+
+        data_loader_use = use_loader
+        _index = 0
+        result = list()
+        for _index, data in enumerate(data_loader_use):
+            words, target = data['words'], data['label']
+
+            if Settings.cuda:
+                words = words.cuda()
+                target = target.cuda()
+
+            with torch.no_grad():
+
+                predicted = model(words)
+                m_tuple_list = self.matrix_tuple(predicted, target)
+                result += m_tuple_list
+
+        print('End of Matrix Record, Save file in {0}'.format(Settings.log_save_folder + log_name))
+        print('-' * 99)
+        with open(Settings.log_save_folder + log_name, 'w+') as f:
+            json.dump(result, f)
+        return
+
 
 if __name__ == '__main__':
     from TextCNN import Model
