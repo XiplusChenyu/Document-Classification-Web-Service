@@ -55,8 +55,8 @@ class Evaluator:
 
         output_res = f_output.detach().numpy()
         target_res = f_target.detach().numpy()
-        predicted_index = np.argmax(output_res)
-        target_index = np.argmax(target_res)
+        predicted_index = np.argmax(output_res, axis=1)
+        target_index = np.argmax(target_res, axis=1)
         result_list = [[int(predicted_index[i]), int(target_index[i])] for i in range(len(predicted_index))]
         return result_list
 
@@ -77,6 +77,7 @@ class Evaluator:
             if Settings.cuda:
                 words = words.cuda()
                 target = target.cuda()
+                self.model = self.model.cuda()
 
             with torch.no_grad():
 
