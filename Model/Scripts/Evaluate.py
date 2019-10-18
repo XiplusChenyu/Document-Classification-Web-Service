@@ -80,7 +80,7 @@ class Evaluator:
 
             with torch.no_grad():
 
-                predicted = model(words)
+                predicted = self.model(words)
                 m_tuple_list = self.matrix_tuple(predicted, target)
                 result += m_tuple_list
 
