@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--============================mobile supporter===================================-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--============================mobile supporter===================================-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--====================================Install Bootstrap=================================================-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.2/js/fileinput.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--====================================local css=================================================-->
+    <link href="https://fonts.googleapis.com/css?family=Anton|Cute+Font|Montserrat|Patua+One" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!--====================================js=================================================-->
+    <script src="./js/main.js"></script>
+
+    <meta charset="UTF-8">
+
+    <title>Document Classifier</title>
+</head>
+<body>
+
+<div class="card" style="width: 90%; margin: 3% 5% 5%;">
+    <div class="card-body">
+        <h2 class="card-title">Document Classifier</h2>
+        <h6 class="card-subtitle mb-2 text-muted">-- Project for HeavyWater.Inc</h6>
+        <p class="card-text">This is a document classifier based on heavy water dataset. Type in one document and get its label.</p>
+    </div>
+    <textarea id="document" class="card-text" style="margin: 0 20px 20px" placeholder="Type in document..."></textarea>
+    <div class="card-body">
+        <button id="getResult" onclick="onSearch()" class="btn btn-primary"><i class="fa fa-car"></i> Get Label</button>
+    </div>
+
+    <!--==================result block======================-->
+
+    <div id="result" class="card-body hide">
+        <h5 class="card-text mb-2 text-muted">Prediction Result (Top3):</h5>
+        <ul class="list-group">
+            <li id="top1" class="list-group-item"></li>
+            <li id="top2" class="list-group-item"></li>
+            <li id="top3" class="list-group-item"></li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
