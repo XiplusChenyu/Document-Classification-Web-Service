@@ -38,14 +38,17 @@ class Evaluator:
                 result += predict
         result /= len(chunks)
 
-        target_index = np.argmax(result) + 1
-        label = self.index_to_label.get(str(target_index))
-        score = np.max(result)
-        dict = {
-            "label": label,
-            "score": float(score)
-        }
-        return dict
+        result = list(result)
+        result = [(self.index_to_label.get(str(i + 1)), float(score)) for i, score in enumerate(result)]
+        top = sorted(result, key=lambda x: -x[1])[:3]
+        res = list()
+        for t in top:
+            map = {
+                "label": t[0],
+                "score": t[1]
+            }
+            res.append(map)
+        return res
 
 
 model = Model()
