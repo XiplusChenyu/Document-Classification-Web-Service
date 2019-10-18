@@ -29,9 +29,15 @@ class Evaluator:
         index_words = FileUtils.index_sentence(sentence, self.word_to_index)
         chunks = FileUtils.divide_sentence(index_words, Settings.seq_size)
         result = np.zeros(Settings.class_num)
+        if Settings.cuda:
+            self.model.cuda()
+            
         for chunk in chunks:
             with torch.no_grad():
                 chunk = torch.from_numpy(np.asarray(chunk)).view(1, Settings.seq_size)
+                if Settings.cuda:
+                    chunk = chunk.cuda()
+                    
                 predict = self.model(chunk)
                 predict = predict.numpy()[0]
                 result += predict

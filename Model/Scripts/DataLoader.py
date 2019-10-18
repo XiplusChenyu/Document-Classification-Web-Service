@@ -40,10 +40,21 @@ def torch_dataset_loader(dataset, batch_size, shuffle, kwargs):
                         **kwargs)
     return loader
 
+# # Original Train
+# train_loader = torch_dataset_loader(Settings.train_path, Settings.batch_size, True, Settings.kwargs)
+# validation_loader = torch_dataset_loader(Settings.valid_path, Settings.batch_size, False, Settings.kwargs)
+# test_loader = torch_dataset_loader(Settings.test_path, Settings.batch_size, False, Settings.kwargs)
 
-train_loader = torch_dataset_loader(Settings.train_path, Settings.batch_size, True, Settings.kwargs)
-validation_loader = torch_dataset_loader(Settings.valid_path, Settings.batch_size, False, Settings.kwargs)
-test_loader = torch_dataset_loader(Settings.test_path, Settings.batch_size, False, Settings.kwargs)
+# # Smaller size Train
+# s_train_loader = torch_dataset_loader(Settings.s_train_path, Settings.batch_size, True, Settings.kwargs)
+# s_validation_loader = torch_dataset_loader(Settings.s_valid_path, Settings.batch_size, False, Settings.kwargs)
+# s_test_loader = torch_dataset_loader(Settings.s_test_path, Settings.batch_size, False, Settings.kwargs)
+
+
+# # Clean data Train
+# e_train_loader = torch_dataset_loader(Settings.e_train_path, Settings.batch_size, True, Settings.kwargs)
+# e_validation_loader = torch_dataset_loader(Settings.e_valid_path, Settings.batch_size, False, Settings.kwargs)
+# e_test_loader = torch_dataset_loader(Settings.e_test_path, Settings.batch_size, False, Settings.kwargs)
 
 if __name__ == '__main__':
 

@@ -8,20 +8,27 @@ class Settings:
     data_path = "../Data/shuffled-full-set-hashed.csv"
     word_dict = "../Data/WordToIndex.json"
     train_path = data_folder + "train.h5"
+    s_train_path = data_folder + "less_train.h5"
+    e_train_path = data_folder + "equal_train.h5"
+    
     valid_path = data_folder + "valid.h5"
+    s_valid_path = data_folder + "less_valid.h5"
+    e_valid_path = data_folder + "equal_valid.h5"
+    
     test_path = data_folder + "test.h5"
+    s_test_path = data_folder + "less_test.h5"
+    e_test_path = data_folder + "equal_test.h5"
+    
     model_save_folder = "../ModelSave/"
     log_save_folder = "../LogSave/"
 
     # Model Paras
     seq_size = 200
-    vocab_size = 300997
+    vocab_size = 172660 # 300997 for old data
     embedding_dim = 512
     class_num = 14
     num_filters = 256  # channels
     filter_sizes = (2, 3, 4)
-    batch_size = 20
-    dropout = 0.6
 
     # Train Paras
     use_cuda = True
@@ -31,8 +38,11 @@ class Settings:
     else:
         kwargs = {}
 
-    learning_rate = 1e-5
-    epoch_num = 20
+    # Training Params
+    learning_rate = None
+    batch_size = None
+    dropout = None
+    epoch_num = None
     dataset_len = None
     log_step = None
-    print_count = 5  # print 5 count for 1 epoch
+    print_count = None  # print 5 count for 1 epoch
