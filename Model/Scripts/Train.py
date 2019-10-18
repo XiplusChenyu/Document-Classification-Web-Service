@@ -9,12 +9,12 @@ from TrainUtils import accuracy_function, bce_loss
 
 def train(model, epoch, train_loader, optimizer, versatile=True):
     """
-    Use this function to train model
+    Use this function to train model, train model for one epoch
     :param model:
-    :param epoch:
+    :param epoch: epoch index
     :param train_loader:
     :param optimizer:
-    :param versatile:
+    :param versatile: print training stages or not
     :return:
     """
     start_time = time.time()
@@ -69,7 +69,7 @@ def validate_test(model, epoch, use_loader):
     """
     Use this function to evaluate model
     :param model:
-    :param epoch:
+    :param epoch: epoch index
     :param use_loader:
     :return:
     """
@@ -106,31 +106,6 @@ def validate_test(model, epoch, use_loader):
     print('-' * 99)
 
     return v_loss, accuracy
-
-
-# def record_matrix(model, use_loader, log_name):
-#     model = model.eval()
-#     data_loader_use = use_loader
-#     _index = 0
-#     result = list()
-#     for _index, data in enumerate(data_loader_use):
-#         spec_input, target = data['mel'], data['tag']
-#
-#         if Para.cuda:
-#             spec_input = spec_input.cuda()
-#             target = target.cuda()
-#
-#         with torch.no_grad():
-#
-#             predicted = model(spec_input)
-#             m_tuple_list = matrix_tuple(predicted, target)
-#             result += m_tuple_list
-#
-#     print('End of Matrix Record, Save file in {0}'.format(Para.LOG_SAVE_FOLD + log_name))
-#     print('-' * 99)
-#     with open(Para.LOG_SAVE_FOLD + log_name, 'w+') as f:
-#         json.dump(result, f)
-#     return
 
 
 def main_train(model, train_loader, valid_loader, log_name, save_name,

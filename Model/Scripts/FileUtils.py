@@ -21,7 +21,7 @@ class FileUtils:
     def index_sentence(sentence, word_dict):
         """
         Convert sentence to index list
-        :param sentence:
+        :param sentence: String
         :param word_dict:
         :return: list
         """
