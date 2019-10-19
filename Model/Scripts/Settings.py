@@ -24,8 +24,8 @@ class Settings:
 
     # Model Paras
     seq_size = 200
-    vocab_size = 172660 # 300997 for old data
-    embedding_dim = 512
+    vocab_size = 300997 # 172660 for old data
+    embedding_dim = 256
     class_num = 14
     num_filters = 256  # channels
     filter_sizes = (2, 3, 4)
