@@ -15,11 +15,10 @@ class CRNNModel(nn.Module):
         self.gruLayer = nn.GRU(input_size=Settings.embedding_dim,
                                hidden_size=128,
                                num_layers=1,
-                               batch_first=True,
                                bidirectional=False)
 
         self.gruLayerF = nn.Sequential(nn.BatchNorm1d(1024),
-                                       nn.Dropout(0.5))
+                                       nn.Dropout(0.6))
 
         cov1 = nn.Conv2d(in_channels=1, out_channels=64, kernel_size=4, stride=1, padding=1)
         torch.nn.init.xavier_uniform_(cov1.weight)
@@ -44,7 +43,7 @@ class CRNNModel(nn.Module):
 
         self.fcBlock1 = nn.Sequential(nn.Linear(in_features=512, out_features=256),
                                       nn.ReLU(),
-                                      nn.Dropout(0.5))
+                                      nn.Dropout(0.6))
 
         self.fcBlock2 = nn.Sequential(nn.Linear(in_features=256, out_features=128),
                                       nn.ReLU(),
