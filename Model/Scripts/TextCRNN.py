@@ -13,7 +13,7 @@ class CRNNModel(nn.Module):
         self.embedding = nn.Embedding(Settings.vocab_size, Settings.embedding_dim, padding_idx=1)
         # we set 1 as padding index
         self.gruLayer = nn.GRU(input_size=Settings.embedding_dim,
-                               hidden_size=1024,
+                               hidden_size=128,
                                num_layers=1,
                                batch_first=True,
                                bidirectional=False)
@@ -42,41 +42,39 @@ class CRNNModel(nn.Module):
                                         nn.ReLU(),
                                         nn.MaxPool2d(kernel_size=5))
 
-        self.fcBlock1 = nn.Sequential(nn.Linear(in_features=8192, out_features=4096),
+        self.fcBlock1 = nn.Sequential(nn.Linear(in_features=512, out_features=256),
                                       nn.ReLU(),
                                       nn.Dropout(0.5))
 
-        self.fcBlock2 = nn.Sequential(nn.Linear(in_features=4096, out_features=2048),
+        self.fcBlock2 = nn.Sequential(nn.Linear(in_features=256, out_features=128),
                                       nn.ReLU(),
                                       nn.Dropout(0.5))
 
-        self.fcBlock3 = nn.Sequential(nn.Linear(in_features=2048, out_features=1024),
-                                      nn.ReLU(),
-                                      nn.Dropout(0.5))
-
-        self.fcBlock4 = nn.Sequential(nn.Linear(in_features=1024, out_features=256),
-                                      nn.ReLU(),
-                                      nn.Dropout(0.5))
-
-        self.output = nn.Sequential(nn.Linear(in_features=256, out_features=Settings.class_num),
+        self.output = nn.Sequential(nn.Linear(in_features=128, out_features=Settings.class_num),
                                     nn.Softmax(dim=1))
 
     def forward(self, inp):
         # batch word
         inp = self.embedding(inp)
         # batch word freq
+        # print(inp.size())
         inp = inp.contiguous().view(inp.size()[1], inp.size()[0], -1)
+        # print(inp.size())
         out, _ = self.gruLayer(inp)
         out = out.contiguous().view(out.size()[1], 1,  out.size()[0], out.size()[2])
+        # print(out.size())
         out = self.convBlock1(out)
+        # print(out.size())
         out = self.convBlock2(out)
+        # print(out.size())
         out = self.convBlock3(out)
+        # print(out.size())
         out = out.contiguous().view(out.size()[0], -1)
+        # print(out.size())
         out = self.fcBlock1(out)
         out = self.fcBlock2(out)
-        out = self.fcBlock3(out)
-        out = self.fcBlock4(out)
         out = self.output(out)
+        # print(out.size())
         return out
 
 

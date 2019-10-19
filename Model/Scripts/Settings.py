@@ -8,15 +8,12 @@ class Settings:
     data_path = "../Data/shuffled-full-set-hashed.csv"
     word_dict = "../Data/WordToIndex.json"
     train_path = data_folder + "train.h5"
-    s_train_path = data_folder + "less_train.h5"
     e_train_path = data_folder + "equal_train.h5"
     
     valid_path = data_folder + "valid.h5"
-    s_valid_path = data_folder + "less_valid.h5"
     e_valid_path = data_folder + "equal_valid.h5"
     
     test_path = data_folder + "test.h5"
-    s_test_path = data_folder + "less_test.h5"
     e_test_path = data_folder + "equal_test.h5"
     
     model_save_folder = "../ModelSave/"
@@ -24,7 +21,7 @@ class Settings:
 
     # Model Paras
     seq_size = 200
-    vocab_size = 300997 # 172660 for old data
+    vocab_size = 300997  # 172660 for old data
     embedding_dim = 256
     class_num = 14
     num_filters = 256  # channels
