@@ -58,7 +58,7 @@ class CRNNModel(nn.Module):
                                       nn.ReLU(),
                                       nn.Dropout(0.5))
 
-        self.output = nn.Sequential(nn.Linear(in_features=256, out_features=10),
+        self.output = nn.Sequential(nn.Linear(in_features=256, out_features=Settings.class_num),
                                     nn.Softmax(dim=1))
 
     def forward(self, inp):
