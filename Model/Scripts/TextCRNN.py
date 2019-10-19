@@ -14,66 +14,38 @@ class CRNNModel(nn.Module):
         # we set 1 as padding index
         self.gruLayer = nn.GRU(input_size=Settings.embedding_dim,
                                hidden_size=128,
-                               num_layers=1,
-                               bidirectional=False)
+                               num_layers=2,
+                               batch_first=True,
+                               bidirectional=True)
 
         self.gruLayerF = nn.Sequential(nn.BatchNorm1d(1024),
                                        nn.Dropout(0.6))
 
-        cov1 = nn.Conv2d(in_channels=1, out_channels=64, kernel_size=4, stride=1, padding=1)
-        torch.nn.init.xavier_uniform_(cov1.weight)
-        self.convBlock1 = nn.Sequential(cov1,
-                                        nn.BatchNorm2d(64),
-                                        nn.ReLU(),
-                                        nn.MaxPool2d(kernel_size=3))
+        self.convs = nn.ModuleList(
+            [nn.Conv2d(1, Settings.num_filters, (k, Settings.embedding_dim)) for k in Settings.filter_sizes])
+        self.dropout = nn.Dropout(Settings.dropout)
+        self.fc = nn.Linear(Settings.num_filters * len(Settings.filter_sizes), Settings.class_num)
+        self.softmax = nn.Softmax(dim=1)
 
-        cov2 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=5, stride=1, padding=1)
-        torch.nn.init.xavier_uniform_(cov2.weight)
-        self.convBlock2 = nn.Sequential(cov2,
-                                        nn.BatchNorm2d(128),
-                                        nn.ReLU(),
-                                        nn.MaxPool2d(kernel_size=4))
-
-        cov3 = nn.Conv2d(in_channels=128, out_channels=256, kernel_size=6, stride=1, padding=1)
-        torch.nn.init.xavier_uniform_(cov3.weight)
-        self.convBlock3 = nn.Sequential(cov3,
-                                        nn.BatchNorm2d(256),
-                                        nn.ReLU(),
-                                        nn.MaxPool2d(kernel_size=5))
-
-        self.fcBlock1 = nn.Sequential(nn.Linear(in_features=512, out_features=256),
-                                      nn.ReLU(),
-                                      nn.Dropout(0.6))
-
-        self.fcBlock2 = nn.Sequential(nn.Linear(in_features=256, out_features=128),
-                                      nn.ReLU(),
-                                      nn.Dropout(0.5))
-
-        self.output = nn.Sequential(nn.Linear(in_features=128, out_features=Settings.class_num),
-                                    nn.Softmax(dim=1))
+    @staticmethod
+    def conv_and_pool(x, conv):
+        x = F.relu(conv(x)).squeeze(3)
+        x = F.max_pool1d(x, x.size(2)).squeeze(2)
+        return x
 
     def forward(self, inp):
         # batch word
         inp = self.embedding(inp)
         # batch word freq
-        # print(inp.size())
-        inp = inp.contiguous().view(inp.size()[1], inp.size()[0], -1)
-        # print(inp.size())
+        print(inp.size())
         out, _ = self.gruLayer(inp)
-        out = out.contiguous().view(out.size()[1], 1,  out.size()[0], out.size()[2])
-        # print(out.size())
-        out = self.convBlock1(out)
-        # print(out.size())
-        out = self.convBlock2(out)
-        # print(out.size())
-        out = self.convBlock3(out)
-        # print(out.size())
-        out = out.contiguous().view(out.size()[0], -1)
-        # print(out.size())
-        out = self.fcBlock1(out)
-        out = self.fcBlock2(out)
-        out = self.output(out)
-        # print(out.size())
+        # print(out.size(), "GRU")
+        out = out.unsqueeze(1)
+        out = torch.cat([self.conv_and_pool(out, conv) for conv in self.convs], 1)
+        out = self.dropout(out)
+        out = self.fc(out)
+        out = self.softmax(out)
+        # print(out.size(), "OUT")
         return out
 
 
