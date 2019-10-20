@@ -30,6 +30,7 @@ class Evaluator:
         index_words = FileUtils.index_sentence(sentence, self.word_to_index)
         chunks = FileUtils.divide_sentence(index_words, Settings.seq_size)
         result = np.zeros(Settings.class_num)
+
         for chunk in chunks:
             with torch.no_grad():
                 chunk = torch.from_numpy(np.asarray(chunk)).view(1, Settings.seq_size)
@@ -39,8 +40,9 @@ class Evaluator:
         result /= len(chunks)
 
         result = list(result)
-        result = [(self.index_to_label.get(str(i + 1)), float(score)) for i, score in enumerate(result)]
-        top = sorted(result, key=lambda x: -x[1])[:3]
+        result = [(str(i + 1), float(score)) for i, score in enumerate(result)]
+        top = sorted(result, key=lambda x: -x[1])
+
         res = list()
         for t in top:
             map = {
@@ -48,7 +50,11 @@ class Evaluator:
                 "score": t[1]
             }
             res.append(map)
+
         return res
+
+    def get_label_map(self):
+        return self.index_to_label
 
 
 model = Model()

@@ -9,12 +9,12 @@ class Settings:
     # Model Paras
     seq_size = 200
     vocab_size = 300997
-    embedding_dim = 512
+    embedding_dim = 256
     class_num = 14
     num_filters = 256  # channels
     filter_sizes = (2, 3, 4)
     batch_size = 20
-    dropout = 0.6
+    dropout = 0.7
 
     # Train Paras
     use_cuda = True
@@ -24,8 +24,4 @@ class Settings:
     else:
         kwargs = {}
 
-    learning_rate = 1e-5
-    epoch_num = 20
-    dataset_len = None
-    log_step = None
     print_count = 5  # print 5 count for 1 epoch

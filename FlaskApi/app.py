@@ -8,6 +8,10 @@ CORS(app)
 
 @app.route('/top_labels', methods=['GET'])
 def get_label():
+    """
+    get result for each document
+    :return:
+    """
     try:
         sentence = request.args.get('document')
         result = evaluator.label_predict(sentence)
@@ -15,6 +19,16 @@ def get_label():
         result = {
             "error": "No Documents"
         }
+    return jsonify(result)
+
+
+@app.route('/label_map', methods=['GET'])
+def get_label_map():
+    """
+    Get a list of label-index map
+    :return:
+    """
+    result = evaluator.get_label_map()
     return jsonify(result)
 
 

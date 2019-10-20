@@ -1,21 +1,4 @@
-from Settings import Settings
-import json
-
-
 class FileUtils:
-
-    @staticmethod
-    def save_dict(mapper, file_name):
-        """
-        Save dictionary to json file
-        :param mapper:
-        :param file_name:
-        :return:
-        """
-        path = Settings.data_folder + file_name
-        with open(path, "w") as file:
-            json.dump(mapper, file)
-        return
 
     @staticmethod
     def index_sentence(sentence, word_dict):
@@ -37,14 +20,17 @@ class FileUtils:
         :return: list of chunks
         """
         if len(words) <= seq_size:
-            res = [words + [1 for x in range(seq_size-len(words))]]
+            res = [words + [1 for x in range(seq_size - len(words))]]
         else:
             remain = list(words)  # don't operate inplace
             res = list()
+
             while remain:
                 add, remain = remain[:seq_size], remain[seq_size:]
-                if len(add) < seq_size:
-                    add = add + [1 for x in range(seq_size-len(add))]
+                if len(add) < seq_size // 3:
+                    break
+                elif len(add) < seq_size:
+                    add = add + [1 for x in range(seq_size - len(add))]
                 res.append(add)
         return res
 
