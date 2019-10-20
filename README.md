@@ -1,5 +1,7 @@
 # HeavyWaterProject
-> I start the project at Wed, Oct 16, the first stage is finished on Fri, Oct 18
+> Start the project at Oct 16, 2019     
+> First stage is finished on Oct 18, 2019  
+> Second stage is finished on Oct 21, 2019  
 
 ## Project Steps
 
