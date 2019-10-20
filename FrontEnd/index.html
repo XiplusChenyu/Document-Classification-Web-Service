@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<div class="card" style="width: 90%; margin: 3% 5% 5%;">
+<div class="card" style="width: 90%; margin: 3% 5% 5%; padding: 5%">
     <div class="card-body">
         <h2 class="card-title">Document Classifier</h2>
         <h6 class="card-subtitle mb-2 text-muted">-- Project for HeavyWater.Inc</h6>
@@ -37,13 +37,14 @@
 
     <!--==================result block======================-->
 
-    <div id="result" class="card-body hide">
-        <h5 class="card-text mb-2 text-muted">Prediction Result (Top3):</h5>
-        <ul class="list-group">
-            <li id="top1" class="list-group-item"></li>
-            <li id="top2" class="list-group-item"></li>
-            <li id="top3" class="list-group-item"></li>
+    <div id="result" class="card" style="width: max-content; margin: auto">
+        <h5 class="card-header" >Prediction Result</h5>
+        <ul id="resultList" class="list-group">
         </ul>
+
+        <div class="card-body">
+            <canvas id="circle" width="600" height="400" style="width: auto">Browser not support Canvas!</canvas>
+        </div>
     </div>
 
 </div>
