@@ -20,12 +20,16 @@ The first step is to figure out how the original data looks like
   - Vocab size = 30997
 - Find the distribution of documents length 
 
+<img height=200 src=https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/LengthD.png>
+
 ### Generate Chunk
 Once found the length distribution, I divided documents into 200 words length chunks
 - abort chunks where we need to pad 3/2 (i.e chunk length < 66)
 
 ### Balance data
 This easily to found that we have a unbalance distribution between data, here is the `chunks num` vs `label` plot.  
+
+<img height=200 src=https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/ChunkD.png>
 
 #### Balance methods
 - limit there is max 2000 chunks for each label to train
@@ -73,12 +77,33 @@ CRNNModel(
 ```
 
 ### Training Stage
+
+#### GCP
+Train models on GCP VM with cuda supported, use `tmux` with `jupyter-notebook` to coding on local browser and keep kernel running on background
+
 #### Train Model
 - Loss Function: BCE
 - Model selection: prediction accuracy
 
-Use validation dataset to select model during training, save model in `ModelSave/` folder
+Use validation dataset to select model during training, save model in `ModelSave/` folder. Use `LogSave/` folder to record train/test logs to visualize data.
+
+##### Sample Train log:
+<img height=200 src=https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/Sample-T.png>
+
+##### Train TextCNN model On balanced set
+
+<img height=200 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/CNNA.png"><img height=200 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/CNNL.png">
 
 
- 
+##### Train TextCNN model On non-balanced set
 
+<img height=200 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/FCNNA.png"><img height=200 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/FCNNL.png">
+
+
+##### Train TextRCNN model On balanced set
+
+<img height=200 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/CRNNA.png"><img height=200 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/CRNNL.png">
+
+##### Analysis
+
+From the plot we can see the GRU+CNN Model has much faster training speed. However, all models suffer from overfitting somehow. So our dataset might be improved in the future
