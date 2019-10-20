@@ -90,20 +90,46 @@ Use validation dataset to select model during training, save model in `ModelSave
 ##### Sample Train log:
 <img height=200 src=https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/Sample-T.png>
 
-##### Train TextCNN model On balanced set
+##### Train TextCNN model On balanced set (50 epochs)
 
 <img height=200 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/CNNA.png"><img height=200 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/CNNL.png">
 
 
-##### Train TextCNN model On non-balanced set
+##### Train TextCNN model On non-balanced set (50 epochs)
 
 <img height=200 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/FCNNA.png"><img height=200 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/FCNNL.png">
 
 
-##### Train TextRCNN model On balanced set
+##### Train TextRCNN model On balanced set (20 epochs)
 
 <img height=200 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/CRNNA.png"><img height=200 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/CRNNL.png">
 
 ##### Analysis
 
-From the plot we can see the GRU+CNN Model has much faster training speed. However, all models suffer from overfitting somehow. So our dataset might be improved in the future
+From the plot we can see the `GRU+CNN` Model has much faster training speed. However, all models suffer from overfitting somehow. So our dataset might be improved in the future
+
+### Model Evaluation
+
+I evaluate our models on
+  - test set (chunks)
+  - 1000 random full documents picked from orignal csv file
+
+#### Full documents evaluation
+  - divide document into chunks
+  - predict labels of chunks, sum their score up and use the label has the largest score
+
+#### Result
+
+|   Model  |  Train Set | Accuracy (chunks) | Accuracy (documents) |
+|:--------:|:----------:|:-----------------:|:----------------------:|
+|  TextCNN |  Balanced  | 76.96% |95.3% |
+| TextRCNN |  Balanced  | 73.49% |88.5% |
+|  TextCNN | Unbalanced | 81.90% |91.6% |
+
+- Thus we pickup the model weights trained on TextCNN model with balanced sets for our web service
+
+#### Confusion Matrix
+
+
+<img height=300 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/CNNM.png"><img height=300 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/CRNNM.png"><img height=300 src="https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/FCNNM.png">
+
