@@ -36,14 +36,20 @@ class FileUtils:
         :param seq_size: chunk size
         :return: list of chunks
         """
-        if len(words) <= seq_size:
+        if len(words) <= seq_size // 3:
+            return list()
+        
+        elif len(words) <= seq_size:
             res = [words + [1 for x in range(seq_size-len(words))]]
         else:
             remain = list(words)  # don't operate inplace
             res = list()
+            
             while remain:
                 add, remain = remain[:seq_size], remain[seq_size:]
-                if len(add) < seq_size:
+                if len(add) < seq_size // 3:
+                    break
+                elif len(add) < seq_size:
                     add = add + [1 for x in range(seq_size-len(add))]
                 res.append(add)
         return res

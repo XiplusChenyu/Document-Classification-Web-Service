@@ -19,7 +19,7 @@ class CRNNModel(nn.Module):
                                bidirectional=True)
 
         self.gruLayerF = nn.Sequential(nn.BatchNorm1d(1024),
-                                       nn.Dropout(0.6))
+                                       nn.Dropout(Settings.dropout))
 
         self.convs = nn.ModuleList(
             [nn.Conv2d(1, Settings.num_filters, (k, Settings.embedding_dim)) for k in Settings.filter_sizes])
@@ -37,7 +37,7 @@ class CRNNModel(nn.Module):
         # batch word
         inp = self.embedding(inp)
         # batch word freq
-        print(inp.size())
+#         print(inp.size())
         out, _ = self.gruLayer(inp)
         # print(out.size(), "GRU")
         out = out.unsqueeze(1)
