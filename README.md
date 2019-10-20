@@ -1,8 +1,10 @@
 # HeavyWaterProject
-- Author: Chenyu Xi
-> Start the project at Oct 16, 2019     
-> First stage is finished on Oct 18, 2019  
-> Second stage is finished on Oct 21, 2019  
+Author: Chenyu Xi (cx2219@columbia.edu)
+
+## Timeline
+- Start the project at `Oct 16, 2019`     
+- First stage is finished on `Oct 18, 2019`  
+- Second stage is finished on `Oct 21, 2019`  
 
 ## Project Steps
 
