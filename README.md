@@ -17,12 +17,20 @@ This part is saved on `FlaskApi/`. See <a href=https://github.com/XiplusChenyu/H
 
 
 ### Build frond end page
-<a href=http://document-classification-buk.s3-website-us-west-1.amazonaws.com/> Sample Website </a>  
+This part is saved on `FrontEnd/`. Use Bootstrap, jQuery, HTML/CSS to build a serverless web page. The page is hosted on AWS S3 bucket. We also use **cloudfront service** from AWS to make this a Https website to ensure security. 
 
-This part is saved on `FrontEnd/`. Use Bootstrap, jQuery, HTML/CSS to build a serverless web page. The page is hosted on AWS S3 bucket
+<a href=https://d3t9jbj88pt3ap.cloudfront.net/index.html> Sample Website</a>
+
+#### UI and sample result
+<img src=https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/UI.png>
 
 ```
-Front End Logic
+Front End Logic:
+Once Load 
+  -> get map files
 
-Get document -> Send to model API -> Get predictions and display them
+User hit get result:
+  -> Get document 
+  -> Send document to Flask API 
+  -> Get predictions and display them
 ```
