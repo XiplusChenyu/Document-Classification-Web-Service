@@ -1,4 +1,4 @@
-BASE_URL =  'http://127.0.0.1:5000';
+BASE_URL =  'http://35.208.155.164:6516';
 labelMap = {};
 color = ["#27446E","#0066FF","#29A9FF","#91C6FF","#717C7E"];
 display_limit = 4;
