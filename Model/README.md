@@ -28,10 +28,8 @@ Once found the length distribution, I divided documents into 200 words length ch
 This easily to found that we have a unbalance distribution between data, here is the `chunks num` vs `label` plot.  
 
 #### Balance methods
-- limit there is only 1000 chunks for each label to train
-- for labels contains words less than 1000 chunks, we generate artifical data:
-  - pick up 2 chunks from the label and combine them
-  - add new chunk into list until we reach 1000 chunks
+- limit there is max 2000 chunks for each label to train
+- for labels contains words less than 1000 chunks, we reuse the chunks (i.e. over-sampling)
 
 ### Unbalance data
 We also build a dataset which contains all chunks from all labels to compare model perfermance
@@ -73,5 +71,14 @@ CRNNModel(
   (softmax): Softmax(dim=1)
 )
 ```
+
+### Training Stage
+#### Train Model
+- Loss Function: BCE
+- Model selection: prediction accuracy
+
+Use validation dataset to select model during training, save model in `ModelSave/` folder
+
+
  
 
