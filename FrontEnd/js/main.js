@@ -1,4 +1,4 @@
-BASE_URL =  'http://35.208.155.164:6516';
+BASE_URL =  'https://document-classification.herokuapp.com';
 labelMap = {};
 color = ["#27446E","#0066FF","#29A9FF","#91C6FF","#717C7E"];
 display_limit = 4;
@@ -12,19 +12,15 @@ function getMap() {
     })
 }
 
-// generate document Query Url
-function generateQueryUrl(text) {
-    return `${BASE_URL}/top_labels?document=${text}`;
-}
 
 
 function onSearch(){
     let text = $("#document").val();
-    let url = generateQueryUrl(text);
+    let url = `${BASE_URL}/top_labels`;
     let resultList = $('#resultList');
     resultList.empty(); // remove old children
 
-    $.get(url, function (result) {
+    $.post(url, {'document': text}, function (result) {
         console.log(result);
         console.log(labelMap);
         $("#result").removeClass("hide");
