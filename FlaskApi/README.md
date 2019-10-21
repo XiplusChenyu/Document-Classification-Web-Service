@@ -17,6 +17,9 @@
 ```
 
 ## API
+API Deploy on Heroku：  
+Root path： https://document-classification.herokuapp.com/
+
 ### Get index to label map
 - Path: `/label_map`
 - Params: `None`
@@ -35,8 +38,8 @@
 
 ### Get prediction/score for one document
 - Path: `/top_labels`
-- Params: `document`; Type: `Query String`
-- Method: `GET`
+- Params: `document`; Type: `Form-data`
+- Method: `POST`
 #### Sample response:
 ```json
 [
@@ -51,6 +54,3 @@
     ...
 ]
 ```
-## Deployment
-- Deploy it on GCP VM
-- For security issue, add firewall on GCP, only allow inbound flow from one specific port (6516)
