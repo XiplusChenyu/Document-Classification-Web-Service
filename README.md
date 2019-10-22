@@ -4,7 +4,12 @@ Author: Chenyu Xi (cx2219@columbia.edu)
 ## Timeline
 - Start the project at `Oct 16, 2019`     
 - First stage is finished on `Oct 18, 2019`  
-- Second stage is finished on `Oct 21, 2019`  
+- Second stage is finished on `Oct 20, 2019` 
+
+### Actions after submission
+> not cheating
+
+- I found that sometimes Heroku API needs time to init if it didn't get request for long time. Thus I add a small animation (waiting result) to improve user experience `Oct 22, 2019` 
 
 ## Project Steps
 
@@ -24,8 +29,12 @@ This part is saved on `FrontEnd/`. Use Bootstrap, jQuery, HTML/CSS to build a se
 #### UI and sample result
 <img src=https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/UI.png>
 
+#### Wait animation
+Sometimes you might need to wait seconds for result:
+<img src=https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/wait.png>
+
+#### Front End Logic:
 ```
-Front End Logic:
 Once Load 
   -> get map files
 
