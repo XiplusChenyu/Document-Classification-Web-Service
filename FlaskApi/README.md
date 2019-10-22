@@ -18,7 +18,8 @@
 
 ## API
 API Deploy on Heroku：  
-Root path： https://document-classification.herokuapp.com/
+Root path： https://document-classification.herokuapp.com/  
+Since Heroku has a 500MB size limit, I deployed caculation endpoint on GCP VM
 
 ### Get index to label map
 - Path: `/label_map`
