@@ -12,17 +12,17 @@ function getMap() {
     })
 }
 
-
-
 function onSearch(){
     let text = $("#document").val();
     let url = `${BASE_URL}/top_labels`;
     let resultList = $('#resultList');
     resultList.empty(); // remove old children
 
+
     $.post(url, {'document': text}, function (result) {
         console.log(result);
         console.log(labelMap);
+        $('#waiter').removeClass('hide');
         $("#result").removeClass("hide");
         let index = 1;
         let scores = [], labels=[];
@@ -53,6 +53,7 @@ function onSearch(){
         labels.push("Others");
         console.log(scores, labels);
         drawCircle("circle", scores, color, labels);
+        $('#waiter').addClass('hide');
     })
 }
 
