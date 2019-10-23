@@ -17,12 +17,12 @@ function onSearch(){
     let url = `${BASE_URL}/top_labels`;
     let resultList = $('#resultList');
     resultList.empty(); // remove old children
+    $('#waiter').removeClass('hide');
 
 
     $.post(url, {'document': text}, function (result) {
         console.log(result);
         console.log(labelMap);
-        $('#waiter').removeClass('hide');
         $("#result").removeClass("hide");
         let index = 1;
         let scores = [], labels=[];
