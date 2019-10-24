@@ -22,7 +22,7 @@ function onSearch(){
     let resultList = $('#resultList');
     resultList.empty(); // remove old children
     $('#waiter').removeClass('hide');
-
+    clearCanvas();
     let body = {
         "document": text
     };
