@@ -41,6 +41,6 @@ Once Load
 
 User hit get result:
   -> Get document 
-  -> Send document to Flask API 
+  -> Send document to API Gateway 
   -> Get predictions and display them
 ```
