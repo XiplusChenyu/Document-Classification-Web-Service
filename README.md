@@ -13,7 +13,7 @@ This part is saved on `FlaskApi/`. See <a href=https://github.com/XiplusChenyu/H
 ### Build frond end page
 This part is saved on `FrontEnd/`. Use Bootstrap, jQuery, HTML/CSS to build a serverless web page. The page is hosted on AWS S3 bucket. We also use **cloudfront** service to make it as Https website to ensure security
 
-<a href=https://d3t9jbj88pt3ap.cloudfront.net/index.html> Sample Website</a>
+<a href=https://d3t9jbj88pt3ap.cloudfront.net/index.html> Sample Website</a> **Closed**
 
 #### UI and sample result
 <img src=https://github.com/XiplusChenyu/HWProject/blob/master/ReadMePics/UI.png>
