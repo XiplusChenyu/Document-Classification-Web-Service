@@ -1,19 +1,7 @@
 # HeavyWaterProject
 Author: Chenyu Xi (cx2219@columbia.edu)
 
-## Timeline
-- Start the project at `Oct 16, 2019`     
-- First stage is finished on `Oct 18, 2019`  
-- Second stage is finished on `Oct 20, 2019` 
-
-### Actions after submission
-> not cheating
-
-- I found that sometimes Heroku API needs time to init if it didn't get request for long time. Thus I add a small animation (waiting result) to improve user experience `Oct 22, 2019` 
-- To use more AWS service, I replace the heroku API with API Gateway and update the readme `Oct 24, 2019`
-
 ## Project Steps
-
 ### Train a deep learning model
 This part is saved on `Model/`. See <a href=https://github.com/XiplusChenyu/HeavyWaterProject/blob/master/Model/README.md>README</a> for more details
 
