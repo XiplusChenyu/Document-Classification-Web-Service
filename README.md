@@ -1,4 +1,4 @@
-# HeavyWaterProject
+# Document Classification Web Service
 Author: Chenyu Xi (cx2219@columbia.edu)
 
 ## Project Steps
